@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince Raj | Full-Stack Developer</title>
+    <meta name="description" content="Hi, I'm PRINCE RAJ, A passionate Full-Stack Web Developer, focusing on modern, responsive, and high-performance websites.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Styling: Defining Theme Variables --- */
+        :root {
+            /* Fallback to Dark Theme (uvdeveloper.com style) */
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #1A1A1A;
+            --text-main: #F0F0F0;
+            --text-secondary: #B0B0B0;
+            --accent-color: #2D89E5;
+            --border-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --bg-pattern-color: rgba(45, 137, 229, 0.08); /* Faint accent color for pattern */
+        }
+
+        /* Light Theme Definition (When body has the .light-theme class) */
+        .light-theme {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F8F8;
+            --text-main: #333333;
+            --text-secondary: #555555;
+            --accent-color: #007bff;
+            --border-color: #E0E0E0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --bg-pattern-color: rgba(0, 123, 255, 0.05); /* Faint accent color for pattern */
+        }
+
+        /* --- Global & Base Styles --- */
+        :root {
+            --font-outfit: 'Outfit', sans-serif;
+            --font-dm-sans: 'DM Sans', sans-serif;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: var(--font-dm-sans);
+            color: var(--text-main);
+            background-color: var(--bg-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- Custom Background Pattern Simulation (Added) --- */
+        .section-with-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-with-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows clicks to go through to content */
+            opacity: 1;
+            z-index: 1; /* Below the content (z-index: 2 or higher) */
+            
+            /* CSS Grid Pattern - simulating the tech/network look */
+            background-image: 
+                linear-gradient(to right, var(--bg-pattern-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--bg-pattern-color) 1px, transparent 1px);
+            background-size: 50px 50px; /* Size of the grid cells */
+            transition: background-image 0.3s; /* Transition on theme switch */
+        }
+
+        /* Ensure content is above the background pattern */
+        .section-with-bg > .container {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* Utility Class for Content Centering */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Headings */
+        h1, h2, h3 {
+            font-family: var(--font-outfit);
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.2;
+            transition: color 0.3s;
+        }
+        h2 {
+            color: var(--accent-color);
+            font-size: 3rem;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--accent-color);
+            filter: brightness(1.2);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--bg-primary); 
+            text-decoration: none;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(45, 137, 229, 0.4);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+        }
+
+        /* --- Theme Toggle Button --- */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            margin-left: 20px;
+        }
+        .theme-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Header/Navigation --- */
+        .header {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo a {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            font-family: var(--font-outfit);
+        }
+
+        .nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav li {
+            margin-left: 30px;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--bg-primary);
+            padding: 100px 0;
+            text-align: left;
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-text { flex: 2; }
+        .hero-text h1 { font-size: 4rem; margin-bottom: 0.5rem; }
+        .hero-text p { font-size: 1.35rem; color: var(--text-secondary); margin-bottom: 30px; }
+        .hero-image { flex: 1; min-width: 300px; text-align: center; }
+        .hero-image img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(45, 137, 229, 0.5);
+            object-fit: cover;
+        }
+
+        /* --- Section Styling --- */
+        .section {
+            padding: 80px 0;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        #about { background-color: var(--bg-primary); }
+
+        /* --- About Section Specific --- */
+        .about-content { display: flex; gap: 40px; justify-content: space-between; align-items: flex-start; }
+        .about-text, .about-skills { flex: 1; }
+        .about-text p { color: var(--text-secondary); margin-bottom: 20px; }
+        .about-skills h3 { color: var(--text-main); margin-bottom: 20px; font-size: 1.8rem; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag {
+            background-color: var(--bg-secondary);
+            color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: 1px solid var(--accent-color);
+            transition: background-color 0.3s;
+        }
+
+        /* --- Services Section Specific --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card {
+            background-color: var(--bg-primary);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            border-left: 5px solid var(--accent-color);
+            transition: border-left 0.3s ease, transform 0.3s ease, background-color 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-left: 5px solid var(--accent-color);
+            filter: brightness(1.2);
+        }
+        .service-card h3 { font-size: 1.5rem; margin-top: 15px; margin-bottom: 10px; }
+        .service-card p { color: var(--text-secondary); }
+        .service-icon { font-size: 2.5rem; color: var(--accent-color); line-height: 1; }
+        
+        /* --- Contact Section Specific --- */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--bg-secondary);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+        .contact-form label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-main); }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-content { flex-direction: column; text-align: center; }
+            .hero-text h1 { font-size: 3rem; }
+            .hero-image { order: -1; }
+            .about-content { flex-direction: column; }
+            .nav-content { flex-direction: column; }
+            .nav ul { margin-top: 10px; }
+            .nav li { margin: 0 15px; }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+
+    <script>
+        // Theme Toggle Logic
+        const themeKey = 'pr_developer_theme';
+
+        function setTheme(theme) {
+            document.body.className = theme;
+            localStorage.setItem(themeKey, theme);
+            updateToggleIcon(theme);
+        }
+
+        function updateToggleIcon(theme) {
+             const toggle = document.getElementById('theme-toggle-btn');
+             if (toggle) {
+                // Moon icon for dark theme, Sun icon for light theme
+                toggle.innerHTML = theme === 'light-theme' ? '&#9790;' : '&#9728;'; 
+             }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.className;
+            const newTheme = currentTheme === 'light-theme' ? 'dark-theme' : 'light-theme';
+            setTheme(newTheme);
+        }
+
+        // Initialize theme and smooth scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved theme or default to dark
+            const savedTheme = localStorage.getItem(themeKey) || 'dark-theme';
+            setTheme(savedTheme);
+
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+
+    <header class="header">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="#hero">PR.DEV</a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <button id="theme-toggle-btn" class="theme-toggle" onclick="toggleTheme()">
+                            &#9728; </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main-content">
+        <section id="hero" class="hero section-with-bg">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Building **Digital Futures** with Code.</h1>
+                    <p>Hi, I'm **Prince Raj**, a Full-Stack Web Developer passionate about delivering high-impact, scalable, and intuitive web applications.</p>
+                    <a href="#portfolio" class="btn">View My Work 🡲</a>
+                </div>
+                <div class="hero-image">
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section section-with-bg">
+            <div class="container">
+                <h2>Who I Am</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>My journey in web development began with a focus on crafting clean, efficient, and maintainable code. I specialize in the **MERN** stack (MongoDB, Express, React, Node.js) but am proficient across various modern technologies.</p>
+                        <p>I handle every aspect of development, from defining the **user experience** and building dynamic UIs to designing resilient database architectures and ensuring robust security practices on the backend.</p>
+                        <p>**Let's transform your complex ideas into elegant, real-world solutions.**</p>
+                    </div>
+                    <div class="about-skills">
+                        <h3>Core Skills</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">JavaScript (ES6+)</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js / Express</span>
+                            <span class="skill-tag">Python (Django/Flask)</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">AWS / Docker</span>
+                            <span class="skill-tag">HTML5 / CSS3</span>
+                            <span class="skill-tag">Git & CI/CD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="services" class="section section-with-bg">
+            <div class="container">
+                <h2>Services</h2>
+                <div class="services-grid">
+                    
+                    <div class="service-card">
+                        <span class="service-icon">💻</span>
+                        <h3>Full-Stack Development</h3>
+                        <p>End-to-end development of custom web applications and SaaS platforms, ensuring seamless integration between front and back end.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-icon">✨</span>
+                        <h3>Modern Front-End</h3>
+                        <p>Creating dynamic, high-performance, and responsive user interfaces using React and modern component architecture.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <span class="service-icon">🔒</span>
+                        <h3>API & Database Architecture</h3>
+                        <p>Designing secure, fast, and scalable RESTful/GraphQL APIs, and optimizing database performance.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <span class="service-icon">☁️</span>
+                        <h3>Cloud Deployment & DevOps</h3>
+                        <p>Setting up infrastructure, deployment pipelines (CI/CD), and hosting on platforms like AWS, Azure, or DigitalOcean.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="portfolio" class="section section-with-bg" style="background-color: var(--bg-primary);">
+            <div class="container">
+                <h2>Selected Work</h2>
+                <p style="text-align: center; color: var(--text-secondary); font-size: 1.2rem;">
+                    **Projects coming soon.** I focus on solutions that solve real business problems, from complex e-commerce to custom management systems.
+                </p>
+                <div style="text-align: center; margin-top: 30px;">
+                    
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="contact" class="section section-with-bg">
+            <div class="container">
+                <h2>Let's Connect</h2>
+                <form class="contact-form" action="your_form_submission_endpoint" method="POST">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit" class="btn">Send Inquiry</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 PR Developer. All rights reserved. | Styled with modern Web Standards.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
